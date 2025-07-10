@@ -1,17 +1,27 @@
 import { ShoppingCart, User, Search} from 'lucide-react'
-import React from 'react'
-
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+useRouter
 const Header = () => {
+    const [text, setText] = useState("")
+    const router = useRouter()
+    const handleSearch = (e)=>{
+        e.preventDefault();
+         router.push(`/?search=${text}`)
+    }
+           
+
     
   return (
     <div><header className="flex items-center justify-between text-white sm:px-6 py-3 px-3 bg-blue-600 shadow-md">
       <div className="text-xl font-bold text-white">Whatbytes</div>
-      <form className="sm:w-1/3 w-1/2 flex flex-row justify-center items-center relative">
+      <form onSubmit={handleSearch} className="sm:w-1/3 w-1/2 flex flex-row justify-center items-center relative">
       <span className='absolute left-[10px]'><Search size={18}/></span>
         <input
           type="text"
           placeholder={` Search products...`}
           className="w-full border px-3 py-2 pl-8 rounded-md focus:outline-none"
+          onChange={(e)=>setText(e.target.value)}
         />
       </form>
       <div className="flex sm:gap-4 items-center">
