@@ -5,8 +5,8 @@ import Filters from "@/components/Filters"
 import ProductCard from "@/components/ProductCard"
 import data from '@/components/data'
 import { useSearchParams } from "next/navigation"
-import { useState, useEffect } from "react"
-
+import { useState, useEffect, Suspense } from "react"
+// Suspense
 export default function Products() {
   const params = useSearchParams()
   const Category = params.get('category')
@@ -40,7 +40,10 @@ useEffect(() => {
    
       
       <main className="flex flex-1 p-6 bg-blue-100">
-        <Filters />
+        <Suspense fallback={<div>Loading..</div>}>
+            <Filters />
+        </Suspense>
+        
         <section className="w-full md:ml-64">
           <div className="px-9 mb-3">
             <h1 className="text-3xl font-bold text-blue-900">Product Listing</h1>
